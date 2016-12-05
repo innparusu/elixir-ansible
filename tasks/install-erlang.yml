@@ -5,8 +5,8 @@
   - gcc
   - openssl
   - openssl-devel
-  - ncures
-  - ncures-devel
+  - ncurses
+  - ncurses-devel
   - java-1.8.0-openjdk-devel
   - fop
   - git
@@ -19,7 +19,8 @@
 
 - name: configure
   command: ./configure
-    chdir: /tmp/opt_src_19.1
+    args:
+      chdir: /tmp/opt_src_19.1
 
 - name: make
   make:
