@@ -1,0 +1,5 @@
+- hosts: all
+  user: user
+  tasks:
+    - include: tasks/install-erlang.yml
+    - include: tasks/install-elixir.yml

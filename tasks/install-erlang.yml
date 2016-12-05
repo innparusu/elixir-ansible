@@ -1,0 +1,32 @@
+- name: install dependent packages
+  yum: name={{ item }} state=latest
+  sudo: yes
+  with_items:
+  - gcc
+  - openssl
+  - openssl-devel
+  - ncures
+  - ncures-devel
+  - java-1.8.0-openjdk-devel
+  - fop
+  - git
+
+- name: download Erlang source 
+  unarchive:
+    url: http://erlang.org/download/otp_src_19.1.tar.gz
+    dest: /tmp
+    copy: no
+
+- name: configure
+  command: ./configure
+    chdir: /tmp/opt_src_19.1
+
+- name: make
+  make:
+    chdir: /tmp/opt_src_19.1
+
+- name: make install
+  sudo: yes
+  make:
+    chdir: /tmp/opt_src_19.1
+    target: install

@@ -1,0 +1,21 @@
+- name: download Elixir source
+  sudo: yes
+  git:
+    repo: 'https://github.com/elixir-lang/elixir'
+    dest: /usr/local/lib
+    version: v1.3.4
+
+- name: make clean
+  sudo: yes
+  make:
+    chdir: /usr/local/lib/elixir
+    target: clean
+
+- name: make test
+  sudo: yes
+  make:
+    chdir: /usr/local/lib/elixir
+    target: test
+
+- name: register path
+  shell:  echo "export /usr/local/lib/elixir/bin:\$PATH" >> ~/.bash_profile; source ~/.bash_profile
