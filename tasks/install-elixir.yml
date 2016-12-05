@@ -5,6 +5,10 @@
     dest: /usr/local/lib
     version: v1.3.4
 
+- name: set locale
+  sudo: yes
+  command: export LC_CTYPE=$LANG
+
 - name: make clean
   sudo: yes
   make:
