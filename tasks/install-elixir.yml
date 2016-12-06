@@ -1,25 +1,30 @@
 - name: download Elixir source
   sudo: yes
   git:
-    repo: 'https://github.com/elixir-lang/elixir'
-    dest: /usr/local/lib
+    repo: "https://github.com/elixir-lang/elixir"
+    dest: /usr/local/lib/elixir
     version: v1.3.4
 
 - name: set locale
   sudo: yes
-  command: export LC_CTYPE=$LANG
+  shell: export LC_CTYPE=$LANG
 
 - name: make clean
   sudo: yes
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
   make:
     chdir: /usr/local/lib/elixir
     target: clean
 
 - name: make test
   sudo: yes
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
+    LC_CTYPE: "ja_JP.UTF-8"
   make:
     chdir: /usr/local/lib/elixir
     target: test
 
 - name: register path
-  shell:  echo "export /usr/local/lib/elixir/bin:\$PATH" >> ~/.bash_profile; source ~/.bash_profile
+  shell:  echo 'export PATH=/usr/local/lib/elixir/bin:$PATH' >> ~/.bash_profile; source ~/.bash_profile

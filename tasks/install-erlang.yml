@@ -13,21 +13,21 @@
 
 - name: download Erlang source 
   unarchive:
-    url: http://erlang.org/download/otp_src_19.1.tar.gz
+    src: "http://erlang.org/download/otp_src_19.1.tar.gz"
     dest: /tmp
     copy: no
 
 - name: configure
   command: ./configure
-    args:
-      chdir: /tmp/opt_src_19.1
+  args:
+    chdir: /tmp/otp_src_19.1
 
 - name: make
   make:
-    chdir: /tmp/opt_src_19.1
+    chdir: /tmp/otp_src_19.1
 
 - name: make install
   sudo: yes
   make:
-    chdir: /tmp/opt_src_19.1
+    chdir: /tmp/otp_src_19.1
     target: install
